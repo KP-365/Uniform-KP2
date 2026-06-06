@@ -29,12 +29,14 @@ const JACKET_SIZES = [
 ];
 const WAIST_SIZES = Array.from({ length: 26 }, (_, i) => String(28 + i)); // 28–53
 const LEG_SIZES = ["28", "29", "30", "31", "32", "33", "34", "35", "36"];
+const JUMPER_SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
 
 type FormData = {
   name: string;
   shoeSize: string;
   collarSize: string;
   jacketSize: string;
+  jumperSize: string;
   trouserWaist: string;
   trouserLeg: string;
   notes: string;
@@ -45,6 +47,7 @@ const EMPTY: FormData = {
   shoeSize: "",
   collarSize: "",
   jacketSize: "",
+  jumperSize: "",
   trouserWaist: "",
   trouserLeg: "",
   notes: "",
@@ -68,6 +71,7 @@ export default function SizingForm() {
     if (!form.shoeSize) e.shoeSize = "Required";
     if (!form.collarSize) e.collarSize = "Required";
     if (!form.jacketSize) e.jacketSize = "Required";
+    if (!form.jumperSize) e.jumperSize = "Required";
     if (!form.trouserWaist) e.trouserWaist = "Required";
     if (!form.trouserLeg) e.trouserLeg = "Required";
     return e;
@@ -98,6 +102,7 @@ export default function SizingForm() {
               "Shoe Size (UK)":     form.shoeSize,
               "Collar Size (in)":   form.collarSize,
               "Jacket Size":        form.jacketSize,
+              "Jumper Size":        form.jumperSize,
               "Trouser Waist (in)": form.trouserWaist,
               "Trouser Leg (in)":   form.trouserLeg,
               "Notes":              form.notes,
@@ -266,6 +271,19 @@ export default function SizingForm() {
                   {COLLAR_SIZES.map((s) => <option key={s} value={s}>{s}"</option>)}
                 </select>
                 {errMsg(errors.collarSize)}
+              </div>
+            </div>
+
+            {/* Section: Jumper */}
+            <div style={{ background: CARD, padding: "36px 36px 28px", marginBottom: "2px" }}>
+              <SectionHeader>Jumper</SectionHeader>
+              <div style={{ maxWidth: "240px" }}>
+                <label style={labelStyle}>Jumper Size</label>
+                <select style={selectStyle(!!errors.jumperSize)} value={form.jumperSize} onChange={(e) => set("jumperSize", e.target.value)}>
+                  <option value="">Select size…</option>
+                  {JUMPER_SIZES.map((s) => <option key={s} value={s}>{s}</option>)}
+                </select>
+                {errMsg(errors.jumperSize)}
               </div>
             </div>
 
