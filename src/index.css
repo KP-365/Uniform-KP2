@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* NHS Blue Base */
+  --primary: 211 100% 36%; /* #005EB8 */
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 210 20% 96%;
+  --secondary-foreground: 211 100% 36%;
+  
+  --background: 210 20% 98%;
+  --foreground: 215 28% 17%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 215 28% 17%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 215 28% 17%;
+  
+  --muted: 210 20% 96%;
+  --muted-foreground: 220 10% 46%;
+  
+  --accent: 210 20% 94%;
+  --accent-foreground: 211 100% 36%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 211 100% 36%;
+  
+  --radius: 0.5rem;
+
+  /* Risk band colors (Red, Amber, Green) */
+  --triage-red: 0 84% 60%;
+  --triage-amber: 32 95% 54%;
+  --triage-green: 142 71% 45%;
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'DM Sans', system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Print styles — compact, black and white, text only, single page */
+@media print {
+  @page {
+    margin: 8mm;
+    size: A4 portrait;
+  }
+
+  /* Hide all screen chrome */
+  .print-hide,
+  header,
+  nav {
+    display: none !important;
+  }
+
+  .sticky {
+    position: static !important;
+  }
+
+  /* Black and white — strip all colour */
+  * {
+    color: black !important;
+    background: white !important;
+    background-color: white !important;
+    border-color: #bbb !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide icons — text only */
+  svg {
+    display: none !important;
+  }
+
+  /* Body type size */
+  body {
+    font-size: 7.5pt !important;
+    line-height: 1.25 !important;
+  }
+
+  h1 { font-size: 11pt !important; margin-bottom: 2pt !important; }
+  h2 { font-size: 9pt  !important; margin-bottom: 2pt !important; }
+  p, li, span, dt, dd { font-size: 7.5pt !important; }
+
+  /* Single column — collapse the two-column handoff grid */
+  .lg\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Compact grid and flex gaps */
+  .gap-6, .gap-4 { gap: 4pt !important; }
+  .gap-2, .gap-1 { gap: 2pt !important; }
+
+  /* Compact spacing utilities */
+  .space-y-6 > * + *,
+  .space-y-4 > * + *,
+  .space-y-3 > * + * { margin-top: 4pt !important; }
+  .space-y-2 > * + *,
+  .space-y-1 > * + * { margin-top: 2pt !important; }
+
+  /* Compact card padding */
+  .p-6 { padding: 5pt 7pt !important; }
+  .p-4 { padding: 4pt 6pt !important; }
+  .p-3, .p-2 { padding: 3pt !important; }
+  .py-6, .py-4 { padding-top: 4pt !important; padding-bottom: 4pt !important; }
+  .py-3 { padding-top: 3pt !important; padding-bottom: 3pt !important; }
+  .px-6, .px-4 { padding-left: 6pt !important; padding-right: 6pt !important; }
+
+  /* Compact margins */
+  .mb-4 { margin-bottom: 3pt !important; }
+  .mb-3 { margin-bottom: 2pt !important; }
+  .mb-2, .mb-1 { margin-bottom: 1pt !important; }
+  .mt-6, .mt-4 { margin-top: 4pt !important; }
+  .mt-2, .mt-1 { margin-top: 2pt !important; }
+
+  /* Borders on cards, plain style */
+  .rounded-lg,
+  .rounded-xl,
+  .rounded-md {
+    border-radius: 2px !important;
+    border: 1px solid #bbb !important;
+  }
+
+  /* Badges: plain outlined text, no colour fill */
+  [class*="badge"],
+  .badge {
+    border: 1px solid #666 !important;
+    border-radius: 2px !important;
+    padding: 0 3pt !important;
+    font-size: 7pt !important;
+    font-weight: 600 !important;
+  }
+
+  /* Avoid page breaks inside individual cards */
+  .rounded-lg,
+  .rounded-xl,
+  li {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Max width fills page */
+  .max-w-7xl,
+  .max-w-5xl {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Remove min-height constraint */
+  .min-h-screen {
+    min-height: unset !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40 transition-colors;
+}
