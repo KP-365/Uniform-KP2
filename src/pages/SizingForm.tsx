@@ -102,7 +102,6 @@ export default function SizingForm() {
               "Shoe Size (UK)":     form.shoeSize,
               "Collar Size (in)":   form.collarSize,
               "Jacket Size":        form.jacketSize,
-              "Jumper Size":        form.jumperSize,
               "Trouser Waist (in)": form.trouserWaist,
               "Trouser Leg (in)":   form.trouserLeg,
               "Notes":              form.notes,
